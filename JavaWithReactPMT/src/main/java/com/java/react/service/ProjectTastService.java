@@ -1,5 +1,7 @@
 package com.java.react.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,6 +85,31 @@ public class ProjectTastService {
 		}
 		
 		return projectTask;
+		
+	}
+	
+	public ProjectTask updateByProjectSequence(ProjectTask updatedTask, String backlog_id, String pt_id){
+		//Update project task
+	     //find existing project task
+	     //replace it with updated task
+	     //save update
+        ProjectTask projectTask = findPTByProjectSequence(backlog_id, pt_id);
+
+         projectTask = updatedTask;
+
+         return projectTaskRepository.save(projectTask);
+    }
+	
+	public void deletePTByProjectSequence(String backlog_id, String pt_id) {
+		ProjectTask projectTask = findPTByProjectSequence(backlog_id, pt_id);
+		
+		/*
+		 * Backlog backlog = projectTask.getBacklog(); List<ProjectTask> pts =
+		 * backlog.getProjectTasks(); pts.remove(projectTask);
+		 * backlogRepository.save(backlog);
+		 */
+
+        projectTaskRepository.delete(projectTask);
 		
 	}
 
